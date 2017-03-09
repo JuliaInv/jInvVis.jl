@@ -1,2 +1,3 @@
-# jInvVis.jl
+# jInvVis
+
 Visualization tools for jInv

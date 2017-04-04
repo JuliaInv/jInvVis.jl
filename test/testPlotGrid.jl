@@ -1,5 +1,5 @@
 using Base.Test
-using jInv.Vis
+using jInvVis
 using jInv.Mesh
 using PyPlot
 

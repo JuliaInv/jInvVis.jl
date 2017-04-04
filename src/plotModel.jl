@@ -33,7 +33,7 @@ limits = tuple([vmax,vmin]...);
 if cutPad >= 0
 	m,M_regular = cutBoundaryLayer(m,M_regular,cutPad);
 end
-if Vis.hasPyPlot
+if jInvVis.hasPyPlot
 	if length(size(m))==2
 		T = m';
 		imshow(T, clim = limits); colorbar();

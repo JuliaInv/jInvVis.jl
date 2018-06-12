@@ -19,7 +19,7 @@ function plotModel
 	filename        :: A filename for automatically saving the image as a file. 
 """
 
-function plotModel(m::Array{Float64},includeMeshInfo::Bool=false,M_regular = [],cutPad::Int64 = 0,limits = [],filename="")
+function plotModel(m::Union{Array{Float64},Array{Float32}},includeMeshInfo::Bool=false,M_regular = [],cutPad::Int64 = 0,limits = [],filename="")
 
 if limits!=[]
 	vmin = limits[1];
@@ -30,13 +30,13 @@ else
 end
 
 limits = tuple([vmax,vmin]...);
-if cutPad >= 0
+if cutPad > 0
 	m,M_regular = cutBoundaryLayer(m,M_regular,cutPad);
 end
 if jInvVis.hasPyPlot
 	if length(size(m))==2
 		T = m';
-		imshow(T, clim = limits); colorbar();
+		imshow(T, clim = limits,cmap = "jet"); colorbar();
 		if includeMeshInfo
 			Omega = M_regular.domain;
 			tics = 0:2:floor(Int64,Omega[2])

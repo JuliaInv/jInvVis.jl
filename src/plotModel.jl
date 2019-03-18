@@ -18,7 +18,6 @@ function plotModel
 	limits			:: Maximum and minimum values in the colorbar.
 	filename        :: A filename for automatically saving the image as a file. 
 """
-
 function plotModel(m::Union{Array{Float64},Array{Float32}},includeMeshInfo::Bool=false,M_regular = [],cutPad::Int64 = 0,limits = [],filename="")
 
 if limits!=[]
@@ -85,8 +84,6 @@ function cutBoundaryLayer
 	pad			    :: The thickness of the layer in cells.
 	
 """
-
-
 function cutBoundaryLayer(m::Array{Float64},M_regular,pad::Int64)
 if pad<=0
 	return m,M_regular;

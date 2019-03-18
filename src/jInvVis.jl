@@ -4,7 +4,6 @@ module jInvVis
 Visualization tools for jInv
 
 """
-
 module jInvVis
     
     using jInv.Mesh
@@ -12,21 +11,21 @@ module jInvVis
     hasPyPlot = false
     try
         using PyPlot
-        hasPyPlot = true
+        global hasPyPlot = true
     catch
     end
 
     hasJOcTree = false
     try
-      using JOcTree
-      hasJOcTree = true
+		using JOcTree
+		global hasJOcTree = true
     catch
     end
 
     hasMATLAB = false
     try
         using MATLAB
-        hasMATLAB = true
+        global hasMATLAB = true
     catch
     end
 

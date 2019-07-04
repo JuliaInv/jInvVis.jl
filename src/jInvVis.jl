@@ -5,7 +5,7 @@ Visualization tools for jInv
 
 """
 module jInvVis
-    
+
     using jInv.Mesh
 
     hasPyPlot = false
@@ -29,7 +29,7 @@ module jInvVis
     catch
     end
 
-    
+
     if hasPyPlot
         include("plotGrid.jl");
         include("viewImage2D.jl");

@@ -19,7 +19,7 @@ export viewOrthoSlices2D
 		cmap      - colormap
 		vmin/vmax - specify intensity range
 """
-function viewOrthoSlices2D(I,Mesh::AbstractTensorMesh;slices=round(Int64,Mesh.n/2),axis=false,linewidth=2,color="w",cmap="jet",vmin=minimum(I),vmax=maximum(I))
+function viewOrthoSlices2D(I,Mesh::AbstractTensorMesh;slices=Int.(round.(Mesh.n/2)),axis=false,linewidth=2,color="w",cmap="jet",vmin=minimum(I),vmax=maximum(I))
 
     #  create big image
     I   = reshape(I,tuple(Mesh.n...));
@@ -27,20 +27,20 @@ function viewOrthoSlices2D(I,Mesh::AbstractTensorMesh;slices=round(Int64,Mesh.n/
     Iyz = I[slices[1],:,:]; # yz view
     Ixy = I[:,:,slices[3]]; # xy view
 
-    Ibl = flipdim(Ixy,2)
-    Ibr = flipdim(Iyz,1)'
-    Itl = flipdim(Ixz,2)
+    Ibl = reverse(Ixy,dims=2)
+    Ibr = reverse(Iyz,dims=1)'
+    Itl = reverse(Ixz,dims=2)
     Itr = fill(0,Mesh.n[3],Mesh.n[3])
     I   = [Itl Ibl; Itr Ibr]
 
     # put together x and y axis of plot
     x,y,z = getNodalAxes(Mesh)
-    xa = [vec(x);z[2:end]+maximum(x)]
-    ya = [vec(y);z[2:end]+maximum(y)]
+    xa = [vec(x);z[2:end].+maximum(x)]
+    ya = [vec(y);z[2:end].+maximum(y)]
 
     domain = [x[1] x[end] y[1] y[end] z[1] z[end]]
     # plot image
-    pcolormesh(xa,ya,flipdim(I',1),hold=true,cmap=cmap,vmin=vmin,vmax=vmax)
+    pcolormesh(xa,ya,reverse(I',dims=1),cmap=cmap,vmin=vmin,vmax=vmax)
 
     # add labels to clarify axis
     axis && xlabel("|-- x -- | -- z -- |")
@@ -53,7 +53,7 @@ function viewOrthoSlices2D(I,Mesh::AbstractTensorMesh;slices=round(Int64,Mesh.n/
     plot([0;maximum(xa)],[domain[4];domain[4]],linewidth=linewidth,color=color)
     plot([domain[2]; domain[2]],[0;maximum(ya)],linewidth=linewidth,color=color)
     plot([0;maximum(xa)],[yc;yc],"--",linewidth=linewidth,color=color)
- plot([0;maximum(x)],[zc;zc]+domain[4],"--",linewidth=linewidth,color=color);
-  plot([xc;xc],[0;maximum(ya)],"--",linewidth=linewidth,color=color);	    plot([zc;zc]+domain[2],[0;maximum(y)],"--",linewidth=linewidth,color=color);
+ plot([0;maximum(x)],[zc;zc].+domain[4],"--",linewidth=linewidth,color=color);
+  plot([xc;xc],[0;maximum(ya)],"--",linewidth=linewidth,color=color);	    plot([zc;zc].+domain[2],[0;maximum(y)],"--",linewidth=linewidth,color=color);
 
 end

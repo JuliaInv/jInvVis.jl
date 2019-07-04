@@ -1,0 +1,16 @@
+name = "jInvVis"
+uuid = "5bf6a894-30f1-50cd-bb48-3b9ccac58e0e"
+license = "MIT"
+desc = "Visualization tools for jInv"
+authors = ["Lars Ruthotto <lruthotto@emory.edu>"]
+version = "0.0.1"
+
+[compat]
+julia = "1"
+
+[deps]
+PyPlot =  "d330b81b-6aea-500a-939a-2ce795aea3ee"
+jInv = "3dacf901-f8cd-5544-86ed-7a705f85c244"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

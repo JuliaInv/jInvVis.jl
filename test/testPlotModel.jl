@@ -1,4 +1,4 @@
-using Base.Test
+using Test
 using jInvVis
 using jInv.Mesh
 using PyPlot

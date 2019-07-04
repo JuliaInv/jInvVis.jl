@@ -15,14 +15,14 @@ function plotGrid
 
 	plotGrid is based on PyPlot.plot and PyPlot.plot3D. All keywords from those functions
 	are available and forwarded to those methods.
-	
+
 """
 function plotGrid(y,M;spacing=[1,1,1],color="b",kwargs...)
 
     if length(y)==M.dim*prod(M.n)
         nn = M.n
-    elseif length(y)==M.dim*prod(M.n+1)
-        nn = M.n+1
+    elseif length(y)==M.dim*prod(M.n .+ 1)
+        nn = M.n .+ 1
     else
         error("plotGrid - unknown grid type, length(y)=$(length(y)), n=$(M.n), dim=$(M.dim)")
     end
@@ -55,11 +55,11 @@ function p3(y1,y2,y3,m,order,s;kwargs...)
     s  = s[order];
     y(x)  =  reshape(permutedims(x,order),(m[1],m[2]*m[3]));
     y1    = y(y1); y2 = y(y2); y3 = y(y3);
-    dx = round(Int64,m./s);
+    dx = Int.(round.(m./s))
     J2 = 1:s[2]:m[2];
     J3 = 1:s[3]:m[3];
     K2 = collect(J2)*ones(Int64,1,length(J3));
-    K3 = ones(Int64,length(J2),1)*(m[2]*(collect(J3)-1))'
+    K3 = ones(Int64,length(J2),1)*(m[2]*(collect(J3).-1))'
     K  = vec(K2)+vec(K3);
     for k=1:length(K)
         plot3D(y1[:,K[k]],y2[:,K[k]], y3[:,K[k]];kwargs...)

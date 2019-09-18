@@ -3,7 +3,7 @@ uuid = "5bf6a894-30f1-50cd-bb48-3b9ccac58e0e"
 license = "MIT"
 desc = "Visualization tools for jInv"
 authors = ["Lars Ruthotto <lruthotto@emory.edu>"]
-version = "0.0.1"
+version = "0.0.2"
 
 [compat]
 julia = "1"

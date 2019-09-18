@@ -17,7 +17,7 @@ function plotGrid
 	are available and forwarded to those methods.
 
 """
-function plotGrid(y,M;spacing=[1,1,1],color="b",kwargs...)
+function plotGrid(y,M;spacing=[1,1,1],color="blue",kwargs...)
 
     if length(y)==M.dim*prod(M.n)
         nn = M.n
@@ -31,12 +31,12 @@ function plotGrid(y,M;spacing=[1,1,1],color="b",kwargs...)
     if M.dim==2
         J1 = 1:spacing[1]:nn[1]; y1 = reshape(yi(1),tuple(nn...));
         J2 = 1:spacing[2]:nn[2]; y2 = reshape(yi(2),tuple(nn...));
-        p1 = plot(y1[:,J2],y2[:,J2]; color=color,  kwargs...);
-        p2 = plot(y1[J1,:]',y2[J1,:]';color=color,  kwargs...);
+        p1 = plot!(y1[:,J2],y2[:,J2]; color=color,legend=nothing,  kwargs...);
+        p2 = plot!(y1[J1,:]',y2[J1,:]';color=color,legend=nothing,  kwargs...);
     elseif M.dim==3
-        pt1 = p3(yi(1),yi(2),yi(3),nn,[1 2 3],spacing; color=color, kwargs...)
-        pt2 = p3(yi(1),yi(2),yi(3),nn,[2,1,3],spacing; color=color, kwargs...);
-        pt3 = p3(yi(1),yi(2),yi(3),nn,[3,1,2],spacing; color=color, kwargs...);
+        pt1 = p3!(yi(1),yi(2),yi(3),nn,[1 2 3],spacing; color=color,legend=nothing, kwargs...)
+		pt2 = p3!(yi(1),yi(2),yi(3),nn,[2,1,3],spacing; color=color,legend=nothing, kwargs...);
+        pt3 = p3!(yi(1),yi(2),yi(3),nn,[3,1,2],spacing; color=color,legend=nothing, kwargs...);
 	else
 		error("plotGrid - cannot handle $(M.dim)-dimensional grids")
     end
@@ -50,7 +50,7 @@ function p3
 	helper function for plotGrid
 
 """
-function p3(y1,y2,y3,m,order,s;kwargs...)
+function p3!(y1,y2,y3,m,order,s;kwargs...)
     m  = m[order];
     s  = s[order];
     y(x)  =  reshape(permutedims(x,order),(m[1],m[2]*m[3]));
@@ -62,6 +62,6 @@ function p3(y1,y2,y3,m,order,s;kwargs...)
     K3 = ones(Int64,length(J2),1)*(m[2]*(collect(J3).-1))'
     K  = vec(K2)+vec(K3);
     for k=1:length(K)
-        plot3D(y1[:,K[k]],y2[:,K[k]], y3[:,K[k]];kwargs...)
+        plot3D!(y1[:,K[k]],y2[:,K[k]], y3[:,K[k]];kwargs...)
     end
 end

@@ -32,7 +32,6 @@ limits = tuple([vmax,vmin]...);
 if cutPad > 0
 	m,M_regular = cutBoundaryLayer(m,M_regular,cutPad);
 end
-if jInvVis.hasPyPlot
 	if length(size(m))==2
 		T = m';
 		imshow(T, clim = limits,cmap = "jet"); colorbar();
@@ -65,7 +64,6 @@ if jInvVis.hasPyPlot
 			savefig(string(filename[1:end-4],".png"));
 		end
 	end
-end
 return;
 end
 

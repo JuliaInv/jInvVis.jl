@@ -1,7 +1,7 @@
 using Test
 using jInvVis
 using jInv.Mesh
-using PyPlot
+using Plots
 
 # tests for regular mesh
 domain = [1 2 0 .1 3 4]

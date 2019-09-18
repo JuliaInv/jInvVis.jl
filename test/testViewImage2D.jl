@@ -1,7 +1,7 @@
 using Test
 using jInvVis
 using jInv.Mesh
-using PyPlot
+using Plots
 
 # tests for regular mesh
 domain = [0 1.1 0 1.0 ]
@@ -11,13 +11,13 @@ I     = randn(tuple(n...))
 xc    = getCellCenteredGrid(Mr)
 
 println("=== test viewImage2D  ===")
-figure(2)
-subplot(1,2,1)
+
+
 viewImage2D(xc[:,1],Mr)
-xlabel("intensity increases -->")
-ylabel("constant intensity")
-subplot(1,2,2)
+xlabel!("intensity increases -->")
+ylabel!("constant intensity")
+# subplot(1,2,2)
 viewImage2D(xc[:,2],Mr)
-ylabel("intensity increases -->")
-xlabel("constant intensity")
-println("==== all passed === ")
+ylabel!("intensity increases -->")
+xlabel!("constant intensity")
+# println("==== all passed === ")

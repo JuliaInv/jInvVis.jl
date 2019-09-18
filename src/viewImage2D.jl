@@ -17,6 +17,6 @@ function viewImage2D(I,M::AbstractTensorMesh;kwargs...)
 		error("viewImage2D supports only 2-dimensional images")
 	end
 	I = reshape(I,tuple(M.n...))
-	x1,x2 = getNodalAxes(M)
-	pcolormesh(x1,x2,I';kwargs...)
+	x1,x2 = getCellCenteredAxes(M)
+	return heatmap(x1,x2,I';kwargs...)
 end

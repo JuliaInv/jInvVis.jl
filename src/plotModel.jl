@@ -56,7 +56,7 @@ end
 			lin[k] = Int(round(k*(size(m,2)/16)));
 		end
 		for k=1:16
-			subplot(4,4,k)
+			subplot(string("44",k))
 			pic = reshape(v[:,lin[k],:],size(m,1),size(m,3))';
 			imshow(pic,clim = limits); title(string("frame",lin[k]));colorbar()
 		end
